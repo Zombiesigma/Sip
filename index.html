@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise!</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* CSS Reset & Full Screen Image */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; 
+            background-color: #000; 
+            font-family: sans-serif;
+        }
+
+        #photoFull {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center center; 
+            display: block;
+            z-index: 1; 
+        }
+    </style>
+</head>
+<body>
+
+    <img src="foto.jpg" id="photoFull" alt="Foto">
+
+    <script>
+        window.onload = function() {
+            
+            // Siapkan file audio (tapi belum diputar)
+            // Ganti 'sound.mp3' dengan nama file lagu/efek suaramu
+            var audioEffect = new Audio('sound.mp3');
+
+            // Timer 5 Detik
+            setTimeout(function() {
+                
+                // 1. Coba putar suara
+                // Kita bungkus dalam try-catch biar kalau diblokir browser, script tidak error
+                audioEffect.play().catch(function(error) {
+                    console.log("Autoplay dicegah browser, suara tidak keluar otomatis.");
+                });
+
+                // 2. Munculkan SweetAlert2
+                Swal.fire({
+                    title: 'Ciahhh! 🫵🫵🫵',
+                    text: 'Makan tuh free WIFI!.',
+                    icon: 'warning', // Ganti jadi 'info', 'warning', 'error', atau 'question'
+                    confirmButtonText: 'Goblok',
+                    confirmButtonColor: '#d33', // Merah gelap biar estetik
+                    backdrop: `rgba(0,0,0,0.6)`, // Background agak gelap saat alert muncul
+                    
+                    // OPSI TAMBAHAN: Animasi masuk (biar makin smooth)
+                    showClass: {
+                        popup: 'swal2-show',
+                        backdrop: 'swal2-backdrop-show',
+                        icon: 'swal2-icon-show'
+                    },
+                    hideClass: {
+                        popup: 'swal2-hide',
+                        backdrop: 'swal2-backdrop-hide',
+                        icon: 'swal2-icon-hide'
+                    }
+                });
+
+            }, 3000); // 5 Detik
+        };
+    </script>
+
+</body>
+</html>
